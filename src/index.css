@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header {
+  display: flex;
+}
+
+header button {
+  background-color: lightgrey;
+  text-align: center;
+  color: black;
+  width: 33.33%;
+  height: 40px;
+  font-size: 1.5em;
+}
+
+header button.current {
+  background-color: black;
+  color: white;
+}

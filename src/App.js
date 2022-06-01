@@ -9,7 +9,7 @@ function App() {
 
   const API_BASE_URL = 'http://jsonplaceholder.typicode.com/';
   const [view, setView] = useState('users');
-  const [items, setItems] = useState([]); 
+  const [items, setItems] = useState([]);
   
   function handleViewUsersClick() {
     setView('users')
@@ -24,14 +24,12 @@ function App() {
   }
 
   useEffect(() => {
-
-    
     async function fetchItems() {
       try {
         const response = await fetch(API_BASE_URL + view);
         if (!response.ok) throw Error('Failed to get response properly');
         const jsonItems = await response.json();
-        
+        console.log(jsonItems);
         setItems(jsonItems);
       } catch (err) {
         console.log(err.message)
@@ -43,11 +41,10 @@ function App() {
 
   return (
     <div>
-      <h1>Hello World!</h1>
       <header>
-        <div onClick={handleViewUsersClick}>users</div>
-        <div onClick={handleViewPostsClick}>posts</div>
-        <div onClick={handleViewCommentsClick}>comments</div>
+        <button className={view === 'users' ? 'current' : null } onClick={handleViewUsersClick}>users</button>
+        <button className={view === 'posts' ? 'current' : null }onClick={handleViewPostsClick}>posts</button>
+        <button className={view === 'comments' ? 'current' : null }onClick={handleViewCommentsClick}>comments</button>
       </header>
 
       { view === 'users' && <Users items={items}/> }
