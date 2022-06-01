@@ -1,6 +1,8 @@
-const Comments = () => {
+const Comments = ({items}) => {
   return (
-    <div>Comments view</div>
+    <ul>
+      {items.map(item => <li key={item.id}>{JSON.stringify(items)}</li>)}
+    </ul>
   )
 }
 

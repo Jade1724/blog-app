@@ -1,6 +1,8 @@
-const Users = () => {
+const Users = ({items}) => {
   return (
-    <div>Users view</div>
+    <ul>
+      {items.map(item => <li key={item.id}>{JSON.stringify(item)}</li>)}
+    </ul>
   )
 }
 

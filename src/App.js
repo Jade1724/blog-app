@@ -32,9 +32,7 @@ function App() {
         if (!response.ok) throw Error('Failed to get response properly');
         const jsonItems = await response.json();
         
-        console.log(jsonItems);
         setItems(jsonItems);
-        // setItems(JSON.parse(jsonItems))
       } catch (err) {
         console.log(err.message)
       }
@@ -52,13 +50,9 @@ function App() {
         <div onClick={handleViewCommentsClick}>comments</div>
       </header>
 
-      <div>
-        {items.map(item => <div>{item.name}</div>)}
-      </div>
-
-      { view === 'users' && <Users /> }
-      { view === 'posts' && <Posts />}
-      { view === 'comments' && <Comments />}
+      { view === 'users' && <Users items={items}/> }
+      { view === 'posts' && <Posts items={items}/> }
+      { view === 'comments' && <Comments items={items}/>}
 
     </div>
   );
