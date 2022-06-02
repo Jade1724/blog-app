@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import Form from './Form';
+import List from "./List";
 
 function App() {
   const API_BASE_URL = "http://jsonplaceholder.typicode.com/";
@@ -14,7 +15,6 @@ function App() {
         const response = await fetch(`${API_BASE_URL}${reqType}`);
         if (!response.ok) throw Error("Failed to get response properly");
         const jsonItems = await response.json();
-        console.log(jsonItems);
         setItems(jsonItems);
       } catch (err) {
         console.log(err.message);
@@ -26,6 +26,7 @@ function App() {
   return (
     <div>
       <Form reqType={reqType} setReqType={setReqType} />
+      <List items={items}/>
     </div>
   );
 }
