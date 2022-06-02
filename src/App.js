@@ -1,67 +1,31 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import Users from "./views/Users";
-import Posts from "./views/Posts";
-import Comments from "./views/Comments";
+import Form from './Form';
 
 function App() {
   const API_BASE_URL = "http://jsonplaceholder.typicode.com/";
-  const [view, setView] = useState("users");
+  const [reqType, setReqType] = useState("users");
   const [items, setItems] = useState([]);
-
-  function handleViewUsersClick() {
-    setView("users");
-  }
-
-  function handleViewPostsClick() {
-    setView("posts");
-  }
-
-  function handleViewCommentsClick() {
-    setView("comments");
-  }
 
   useEffect(() => {
     async function fetchItems() {
       try {
-        const response = await fetch(API_BASE_URL + view);
+        const response = await fetch(`${API_BASE_URL}${reqType}`);
         if (!response.ok) throw Error("Failed to get response properly");
         const jsonItems = await response.json();
+        console.log(jsonItems);
         setItems(jsonItems);
       } catch (err) {
         console.log(err.message);
       }
     }
     (async () => fetchItems())();
-  }, [view]);
+  }, [reqType]);
 
   return (
     <div>
-      <header>
-        <button
-          className={view === "users" ? "current" : null}
-          onClick={handleViewUsersClick}
-        >
-          users
-        </button>
-        <button
-          className={view === "posts" ? "current" : null}
-          onClick={handleViewPostsClick}
-        >
-          posts
-        </button>
-        <button
-          className={view === "comments" ? "current" : null}
-          onClick={handleViewCommentsClick}
-        >
-          comments
-        </button>
-      </header>
-
-      {view === "users" && <Users items={items} />}
-      {view === "posts" && <Posts items={items} />}
-      {view === "comments" && <Comments items={items} />}
+      <Form reqType={reqType} setReqType={setReqType} />
     </div>
   );
 }
