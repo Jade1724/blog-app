@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import Form from './Form';
-import List from "./List";
+import Table from "./Table";
 
 function App() {
   const API_BASE_URL = "http://jsonplaceholder.typicode.com/";
@@ -26,7 +26,7 @@ function App() {
   return (
     <div>
       <Form reqType={reqType} setReqType={setReqType} />
-      <List items={items}/>
+      <Table items={items}/>
     </div>
   );
 }
